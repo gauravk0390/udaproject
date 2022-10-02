@@ -1,6 +1,5 @@
 version: 2.1
 orbs:
-  node: 'circleci/node:13.8.0'
   slack: circleci/slack@4.1
 #dummy commit
 commands:
