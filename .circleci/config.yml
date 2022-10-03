@@ -173,7 +173,7 @@ jobs:
       # Add ssh keys with fingerprint
       # attach workspace
       - attach_workspace:
-          at: ~/project/.circleci/ansible/inventory.txt
+          at: ~/project/.circleci/ansible
       - run:
           name: Install dependencies
           command: |
