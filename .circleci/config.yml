@@ -200,8 +200,9 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            npm cache clean --force 
-            npm install
+            npm install @types/jasmine
+            npm install "concurrently"
+            npm install "lite-server"
             npm audit fix --audit-level=critical --force
             npm run migrations > migrations_dump.txt 
             npm audit fix --audit-level=critical --force
