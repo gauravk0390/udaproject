@@ -179,6 +179,8 @@ jobs:
           command: |
             # install the dependencies needed for your playbook
             apk add --update ansible 
+            yum install -y tar gzip
+            yum install awscli
       - run:
           name: Configure server
           command: |
