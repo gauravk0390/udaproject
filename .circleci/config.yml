@@ -179,8 +179,8 @@ jobs:
           command: |
             # install the dependencies needed for your playbook
             apk add --update ansible 
-            apt-get install -y tar gzip
-            apt-get install awscli
+            apt install --assume-yes tar gzip
+           apt install --assume-yes awscli
       - run:
           name: Configure server
           command: |
