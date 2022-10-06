@@ -153,7 +153,7 @@ jobs:
             backend_ip=$(aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
-            echo "$backend_ip" >> .circleci/ansible/inventory.txt
+            echo "$backend_ip" >> ~/project/.circleci/ansible/inventory.txt
             echo "$backend_ip" 
             cat ~/project/.circleci/ansible/inventory.txt
       - persist_to_workspace:
