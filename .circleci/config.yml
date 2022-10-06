@@ -240,11 +240,11 @@ jobs:
           id: ${CIRCLE_WORKFLOW_ID:0:7}    
   deploy-frontend:
     docker:
-      - image: circleci/node:13.8.0
-      - attach_workspace:
-          at: ~/     
+      - image: circleci/node:13.8.0   
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/
       - run:
           command: |
             # install the dependencies needed for your playbook
