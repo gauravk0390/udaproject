@@ -192,7 +192,6 @@ jobs:
           command: |
             # install the dependencies needed for your playbook
             apk add --update ansible
-            apk add --upgrade bash
             apk add openssh-client
             apk add --no-cache tar gzip
             apk add --no-cache gzip
