@@ -241,6 +241,8 @@ jobs:
   deploy-frontend:
     docker:
       - image: circleci/node:13.8.0
+      - attach_workspace:
+          at: ~/     
     steps:
       - checkout
       - run:
@@ -282,7 +284,7 @@ jobs:
           name: Install dependencies
           command: |
             # install the dependencies needed for your playbook
-            apk add --update ansible
+            apk add --update ansible openssh_client
             apk add curl
             apk add --no-cache tar gzip
             apk add --no-cache gzip
@@ -290,14 +292,12 @@ jobs:
             apk add nodejs npm           
             apk --no-cache add curl
             apk --no-cache add unzip
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            ./aws/install  
+            pip install awscli
       - run:
           name: Deploy backend
           command: |
             cd backend
-            npm i
+            npm install
             npm run build
             cp package* ./dist
             cd ..
@@ -310,7 +310,7 @@ jobs:
             echo "$backend_ip" >> ~/project/.circleci/ansible/inventory.txt
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
-            cat inventory.txt
+            cat ~/project/.circleci/ansible/inventory.txt
             ansible-playbook -i ~/project/.circleci/ansible/inventory.txt ~/project/.circleci/ansible/deploy-backend.yml
       - destroy-environment:
           id: udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
