@@ -152,6 +152,7 @@ jobs:
           command: |
             backend_ip=$(aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --filters "Name=tag:udacity,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --output text)
             echo "$backend_ip" >> ~/project/.circleci/ansible/inventory.txt
             echo "$backend_ip" 
@@ -176,7 +177,7 @@ jobs:
       # Add ssh keys with fingerprint
       # attach workspace
       - attach_workspace:
-          at: ~/project/.circleci/ansible
+          at: ~/
       - run:
           name: Install dependencies
           command: |
@@ -193,7 +194,7 @@ jobs:
       - run:
           name: Configure server
           command: |
-            cd .circleci/ansible
+            cd .circleci/ansible 
             cat ~/project/.circleci/ansible/inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment:
