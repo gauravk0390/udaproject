@@ -246,10 +246,10 @@ jobs:
       - run:
           command: |
             # install the dependencies needed for your playbook
-            apt-get -y -qq update
-            apt-get -y -qq install python
-            apt-get -y -qq install awscli
-            apt-get -y -qq install -y tar 
+            sudo apt-get -y -qq update
+            sudo apt-get -y -qq install python
+            sudo apt-get -y -qq install awscli
+            sudo apt-get -y -qq install -y tar 
       - run:
           name: Get backend url
           command: |
