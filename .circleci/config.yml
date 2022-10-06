@@ -191,7 +191,9 @@ jobs:
           name: Install dependencies
           command: |
             # install the dependencies needed for your playbook
-            apk add --update ansible 
+            apk add --update ansible
+            apk add --upgrade bash
+            apk add openssh-client
             apk add --no-cache tar gzip
             apk add --no-cache gzip
             apk update
@@ -213,7 +215,7 @@ jobs:
       # Here's where you will add some code to rollback on failure
   run-migrations:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/node:13.8.0
     steps:
       - checkout
       - restore_cache:
