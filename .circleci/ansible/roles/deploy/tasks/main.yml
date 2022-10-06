@@ -37,7 +37,7 @@
 
 - name: Copy index test page
   template:
-    src: "artifact.tar.gz"
+    src: "/root/project/.circleci/artifact.tar.gz"
     dest: "~/web/artifact.tar.gz"
 
 - name: Executing node
