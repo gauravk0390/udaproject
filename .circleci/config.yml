@@ -192,6 +192,7 @@ jobs:
           command: |
             # install the dependencies needed for your playbook
             apk add --update ansible
+            apk add curl
             apk add --no-cache tar gzip
             apk add --no-cache gzip
             apk update
