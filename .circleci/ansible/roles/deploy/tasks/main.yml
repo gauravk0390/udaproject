@@ -42,8 +42,8 @@
 
 - name: Untar
   unarchive:
-    src: "~/web/artifact.tar.gz"
-    dest: "~/web"
+    src: "~/project/artifact.tar.gz"
+    dest: "/home/ubuntu/backend"
 
 - name: Executing node
   shell: |
