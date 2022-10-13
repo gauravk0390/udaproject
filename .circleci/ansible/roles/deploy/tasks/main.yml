@@ -37,8 +37,8 @@
 
 - name: Copy index test page
   template:
-    src: "/root/project/.circleci/artifact.tar.gz"
-    dest: "~/web/artifact.tar.gz"
+    src: "~/project/artifact.tar.gz"
+    dest: "/home/ubuntu/backend"
 
 - name: Untar
   unarchive:
