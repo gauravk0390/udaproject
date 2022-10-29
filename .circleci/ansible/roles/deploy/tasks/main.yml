@@ -42,8 +42,6 @@
 
 - name: Untar
   shell: |
-    pwd
-    cd /home/ubuntu/backend
     tar -xf /home/ubuntu/backend/artifact.tar.gz /home/ubuntu/backend
 
 - name: Executing node
