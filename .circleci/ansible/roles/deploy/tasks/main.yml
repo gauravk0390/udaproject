@@ -42,7 +42,7 @@
 
 - name: Untar
   shell: |
-    tar -xf /home/ubuntu/backend/artifact.tar.gz /home/ubuntu/backend
+    tar -xf /home/ubuntu/backend/artifact.tar.gz
 
 - name: Executing node
   shell: |
