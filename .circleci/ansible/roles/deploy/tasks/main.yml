@@ -41,9 +41,9 @@
     dest: "/home/ubuntu/backend/"
 
 - name: Untar
-  unarchive:
-    src: "/home/ubuntu/backend/artifact.tar.gz"
-    dest: "/home/ubuntu/backend"
+  shell: |
+    pwd
+    tar -xf /home/ubuntu/backend/artifact.tar.gz
 
 - name: Executing node
   shell: |
