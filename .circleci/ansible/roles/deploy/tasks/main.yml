@@ -38,7 +38,7 @@
 - name: Copy index test page
   template:
     src: "~/project/artifact.tar.gz"
-    dest: "/home/ubuntu/backend"
+    dest: "/home/ubuntu/backend/"
 
 - name: Untar
   unarchive:
