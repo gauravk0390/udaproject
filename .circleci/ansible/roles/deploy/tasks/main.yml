@@ -36,7 +36,7 @@
     state: directory
 
 - name: Copy index test page
-  template:
+  copy:
     src: "~/project/artifact.tar.gz"
     dest: "/home/ubuntu/backend/"
 
