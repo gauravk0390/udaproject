@@ -32,7 +32,7 @@
 
 - name: Creates directory
   file:
-    path: ~/web
+    path: /home/ubuntu/backend/
     state: directory
 
 - name: Copy index test page
