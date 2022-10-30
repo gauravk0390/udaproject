@@ -29,7 +29,6 @@ commands:
             if(( $SUCCESS==1 )); 
             then
                cd ~/project/backend
-               npm run migrations:revert
             fi
             
 jobs:
