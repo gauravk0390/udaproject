@@ -342,13 +342,13 @@ jobs:
             cat ~/project/.circleci/ansible/inventory.txt
             export ANSIBLE_HOST_KEY_CHECKING=False
             ansible-playbook -i ~/project/.circleci/ansible/inventory.txt ~/project/.circleci/ansible/deploy-backend.yml
-  smoke-test:
+  front-end-smoke-test:
     docker:
       - image: python:3.7-alpine3.11
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: /root
       - run:
           name: Install dependencies
           command: | 
@@ -366,6 +366,26 @@ jobs:
             else
               return 1
             fi
+      - destroy-environment:
+          id: udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
+      - destroy-environment:
+          id: udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
+      - revert-migrations:
+          id: ${CIRCLE_WORKFLOW_ID:0:7}
+  back-end-smoke-test:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /root
+      - run:
+          name: Install dependencies
+          command: | 
+            apk add --update curl
+            pip install awscli
+            apk add nodejs npm
+            apk add openssh-client 
       - run:
           name: Backend smoke test
           command: |
@@ -381,12 +401,6 @@ jobs:
             else
               return 1
             fi
-      - destroy-environment:
-          id: udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
-      - destroy-environment:
-          id: udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
-      - revert-migrations:
-          id: ${CIRCLE_WORKFLOW_ID:0:7}
 workflows:
   default:
     jobs:
@@ -414,5 +428,7 @@ workflows:
           requires: [run-migrations]
       - deploy-backend:
           requires: [run-migrations]
-      - smoke-test:
+      - front-end-smoke-test:
           requires: [deploy-backend, deploy-frontend]
+      - back-end-smoke-test:
+          requires: [front-end-smoke-test
