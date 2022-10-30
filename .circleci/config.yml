@@ -342,7 +342,7 @@ jobs:
           command: | 
             apk add --update curl
             pip install awscli
-           apk add nodejs npm  
+            apk add nodejs npm  
       - run:
           name: Frontend smoke test
           command: |
