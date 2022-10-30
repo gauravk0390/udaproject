@@ -196,12 +196,13 @@ jobs:
             apk add curl
             apk add --no-cache tar gzip
             apk add --no-cache gzip
+            apk add openssh-client
             apk update
             apk --no-cache add curl
             apk --no-cache add unzip
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
-            ./aws/install  
+            ./aws/install
       - run:
           name: Configure server
           command: |
@@ -306,6 +307,7 @@ jobs:
             apk add --no-cache tar gzip
             apk add --no-cache gzip
             apk update
+            apk add openssh-client
             apk add nodejs npm           
             apk --no-cache add curl
             apk --no-cache add unzip
@@ -343,7 +345,8 @@ jobs:
           command: | 
             apk add --update curl
             pip install awscli
-            apk add nodejs npm  
+            apk add nodejs npm
+            apk add openssh-client 
       - run:
           name: Frontend smoke test
           command: |
