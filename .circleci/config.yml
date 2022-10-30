@@ -162,8 +162,7 @@ jobs:
       - destroy-environment:
           id: udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
       - destroy-environment:
-          id: udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
-      # Here's where you will add some code to rollback on failure      
+          id: udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}    
   configure-infrastructure:
     docker:
       - image: python:3.7-alpine3.11
@@ -216,8 +215,6 @@ jobs:
       - image: cimg/node:13.8.0
     steps:
       - checkout
-      - restore_cache:
-          keys: [backend-build]
       - run:
           name: Run migrations
           command: |
@@ -249,9 +246,11 @@ jobs:
           command: |
             # install the dependencies needed for your playbook
             sudo apt-get -y -qq update
-            sudo apt-get -y -qq install python
+            sudo apt-get -y -qq install python3
             sudo apt-get -y -qq install -y tar 
             sudo apt-get -qq install awscli
+            sudo npm install webpack-dev-server -g
+            sudo npm install
       - run:
           name: Get backend url
           working_directory: /home/circleci/project/frontend
@@ -313,6 +312,17 @@ jobs:
       - run:
           name: Deploy backend
           command: |
+            echo ENVIRONMENT: production >> "backend/.env"
+            echo NODE_ENV=production >> "backend/.env"
+            echo TYPEORM_CONNECTION=postgres >> "backend/.env"
+            echo TYPEORM_MIGRATIONS=./src/migrations/*.ts >> "backend/.env"
+            echo TYPEORM_MIGRATIONS_DIR=./src/migrations >> "backend/.env"
+            echo TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts>> "backend/.env"
+            echo TYPEORM_HOST=$TYPEORM_HOST >> "backend/.env"
+            echo TYPEORM_PORT=$TYPEORM_PORT >> "backend/.env"
+            echo TYPEORM_USERNAME=$TYPEORM_USERNAME >> "backend/.env"
+            echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> "backend/.env"
+            echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> "backend/.env"
             cd backend
             npm install
             npm run build
