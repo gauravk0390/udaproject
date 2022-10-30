@@ -200,9 +200,7 @@ jobs:
             apk update
             apk --no-cache add curl
             apk --no-cache add unzip
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            ./aws/install
+            pip install awscli
       - run:
           name: Configure server
           command: |
@@ -252,8 +250,8 @@ jobs:
             # install the dependencies needed for your playbook
             sudo apt-get -y -qq update
             sudo apt-get -y -qq install python
-            sudo apt-get -y -qq install awscli
             sudo apt-get -y -qq install -y tar 
+            sudo apt-get -qq install awscli
       - run:
           name: Get backend url
           working_directory: /home/circleci/project/frontend
