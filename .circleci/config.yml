@@ -249,6 +249,7 @@ jobs:
             sudo apt-get -y -qq install python3
             sudo apt-get -y -qq install -y tar 
             sudo apt-get -qq install awscli
+            cd frontend
             sudo npm install webpack-dev-server -g
             sudo npm install
       - run:
