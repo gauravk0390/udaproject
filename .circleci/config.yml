@@ -208,6 +208,7 @@ jobs:
           command: |
             cd backend
             npm install
+            npm audit fix --audit-level=critical --force
             touch migrations_dump.txt 
             npm run migrations >> migrations_dump.txt 
             cat migrations_dump.txt 
@@ -337,6 +338,7 @@ jobs:
             apk add --update curl
             pip install awscli
             apk add nodejs npm
+            npm audit fix --audit-level=critical --force
             apk add openssh-client 
       - run:
           name: Frontend smoke test
