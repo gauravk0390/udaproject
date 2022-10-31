@@ -13,7 +13,9 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
-            aws cloudformation delete-stack --stack-name << parameters.id >>
+            aws cloudformation delete-stack --stack-name udapeople-fronend-<< parameters.id >>
+            aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.id >>
+            aws s3 rm s3://udapeople-<< parameters.id >> --recursive
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
@@ -159,9 +161,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
       - destroy-environment:
-          id: udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
-      - destroy-environment:
-          id: udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}    
+          id: ${CIRCLE_WORKFLOW_ID:0:7} 
   configure-infrastructure:
     docker:
       - image: python:3.7-alpine3.11
@@ -201,9 +201,7 @@ jobs:
             export ANSIBLE_HOST_KEY_CHECKING=False
             ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment:
-          id: udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
-      - destroy-environment:
-          id: udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}            
+          id: ${CIRCLE_WORKFLOW_ID:0:7}          
   run-migrations:
     docker:
       - image: cimg/node:13.8.0
@@ -274,9 +272,7 @@ jobs:
           paths:
             - project/frontend/dist 
       - destroy-environment:
-          id: udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
-      - destroy-environment:
-          id: udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}        
+          id: ${CIRCLE_WORKFLOW_ID:0:7}      
   deploy-backend:
     docker:
       - image: python:3.7-alpine3.11
@@ -357,9 +353,7 @@ jobs:
               return 1
             fi
       - destroy-environment:
-          id: udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
-      - destroy-environment:
-          id: udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
+          id: ${CIRCLE_WORKFLOW_ID:0:7} 
       - revert-migrations:
           id: ${CIRCLE_WORKFLOW_ID:0:7}
   back-end-smoke-test:
