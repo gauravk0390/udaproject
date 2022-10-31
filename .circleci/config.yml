@@ -257,7 +257,7 @@ jobs:
             --filters "Name=tag:udacity,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --output text)
             export API_URL="http://${backend_pub_ip}:3030"
-            echo "API_URL"=${API_URL} >> .env
+            echo "API_URL=${API_URL}" >> .env
             echo "${API_URL}"
       - run:
           name: Deploy frontend objects
