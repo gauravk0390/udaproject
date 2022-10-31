@@ -27,7 +27,7 @@ commands:
           when: on_fail
           command: |
             SUCCESS = $(curl --insecure  https://kvdb.io/PJGM9wW4Noz6Fe6Wci6b5y/migration_<< parameters.id >>)
-            if(( $SUCCESS==1 )); 
+            if(( ${SUCCESS}==1 )); 
             then
             cd ~/project/backend
             npm run migrations:revert
@@ -348,8 +348,8 @@ jobs:
             fi
       - destroy-environment:
           id: ${CIRCLE_WORKFLOW_ID:0:7} 
-      # - revert-migrations:
-      #     id: ${CIRCLE_WORKFLOW_ID:0:7}
+      - revert-migrations:
+          id: ${CIRCLE_WORKFLOW_ID:0:7}
   back-end-smoke-test:
     docker:
       - image: python:3.7-alpine3.11
