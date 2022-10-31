@@ -63,11 +63,7 @@ jobs:
           command: |
             cd backend
             npm install
-            npm run build
-      - slack/notify:
-          channel: C044US15HGC
-          event: fail
-          template: basic_fail_1           
+            npm run build         
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
@@ -389,8 +385,7 @@ workflows:
   default:
     jobs:
       - build-frontend
-      - build-backend:
-          context: slack-secrets
+      - build-backend
       - test-frontend:
           requires: [build-frontend]
       - test-backend:
