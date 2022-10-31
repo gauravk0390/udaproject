@@ -177,16 +177,12 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["cd:88:70:73:94:0f:81:e9:63:8b:05:c1:1e:0b:14:d9"] # You can get this ID in the section where you registered the SSH Key
-      # Checkout code from git repo
-      # Add ssh keys with fingerprint
-      # attach workspace
+          fingerprints: ["cd:88:70:73:94:0f:81:e9:63:8b:05:c1:1e:0b:14:d9"] 
       - attach_workspace:
           at: ~/
       - run:
           name: Install dependencies
           command: |
-            # install the dependencies needed for your playbook
             apk add --update ansible
             apk add --update bash
             apk add curl
@@ -208,7 +204,6 @@ jobs:
           id: udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
       - destroy-environment:
           id: udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}            
-      # Here's where you will add some code to rollback on failure
   run-migrations:
     docker:
       - image: cimg/node:13.8.0
@@ -244,7 +239,6 @@ jobs:
           keys: [frontend-build]
       - run:
           command: |
-            # install the dependencies needed for your playbook
             sudo apt-get -y -qq update
             sudo apt-get -y -qq install python3
             sudo apt-get -y -qq install -y tar 
@@ -291,11 +285,9 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - add_ssh_keys:
-          fingerprints: ["cd:88:70:73:94:0f:81:e9:63:8b:05:c1:1e:0b:14:d9"] # You can get this ID in the section where you registered the SSH Key
+          fingerprints: ["cd:88:70:73:94:0f:81:e9:63:8b:05:c1:1e:0b:14:d9"]  
       - attach_workspace:
           at: ~/
-      # Add ssh keys with fingerprint
-      # attach 
       - run:
           name: Install dependencies
           command: |
@@ -329,7 +321,6 @@ jobs:
             npm run build
             cp package* ./dist
             cd ..
-            # Zip the directory
             tar -C backend -czvf artifact.tar.gz .
             ls -lrt
             backend_aws_ip=$(aws ec2 describe-instances \
