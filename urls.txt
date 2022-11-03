@@ -1,0 +1,5 @@
+URL 01: https://github.com/gauravk0390/udaproject
+URL 02: http://udapeople-16ec96e.s3-website-us-east-1.amazonaws.com/#/employees
+URL 03: https://d33ajov54a1vif.cloudfront.net/#/employees
+URL 04: http://34.228.156.98:3030/api/status
+URL 05: http://3.90.226.81:9090/alerts
