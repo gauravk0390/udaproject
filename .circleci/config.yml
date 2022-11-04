@@ -431,7 +431,7 @@ jobs:
             OldWokflowID="4e90c3c"
             if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWokflowID}" ]]
             then
-              aws s3 rm s3://udapeople-${OldWokflowID} --recursive --region us-east-1
+              aws s3 rm s3://udapeople-$OldWokflowID --recursive --region us-east-1
               aws cloudformation delete-stack --stack-name udapeople-frontend-${OldWokflowID}
               echo "Delete old backend stack"
               aws cloudformation delete-stack --stack-name udapeople-backend-${OldWokflowID} 
