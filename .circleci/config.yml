@@ -427,8 +427,7 @@ jobs:
             --stack-status-filter CREATE_COMPLETE --no-paginate --output text)
       - run:
           name: Remove old stacks and files
-          command: | 
-             OldWokflowID="efa138c"
+          command: OldWokflowID="efa138c"
           command: |
             if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWokflowID}" ]]
             then
