@@ -428,6 +428,7 @@ jobs:
       - run:
           name: Remove old stacks and files
           command: |
+            export OldWokflowID="4e90c3c"
             if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWokflowID}" ]]
             then
               aws s3 rm s3://udapeople-${OldWokflowID} --recursive --region us-east-1
